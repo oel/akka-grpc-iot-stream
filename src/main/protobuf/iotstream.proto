@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "akkagrpc";
+option java_outer_classname = "IotStreamProto";
+
+service IotStreamService {
+    rpc sendIotUpdate(stream StatesUpdateRequest) returns (stream StatesUpdateResponse) {}
+    rpc broadcastIotUpdate(stream StatesUpdateRequest) returns (stream StatesUpdateResponse) {}
+}
+
+message StatesUpdateRequest {
+    string id = 1;
+    string client_id = 2;
+    int32 property_id = 3;
+    string device_id = 4;
+    int32 device_type = 5;
+    int64 timestamp = 6;
+    int32 op_state = 7;
+    int32 setting = 8;
+}
+
+message StatesUpdateResponse {
+    string id = 1;
+    string client_id = 2;
+    int32 property_id = 3;
+    string device_id = 4;
+    int32 device_type = 5;
+    int64 timestamp = 6;
+    int32 op_state_new = 7;
+    int32 setting_new = 8;
+}
